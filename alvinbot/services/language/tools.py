@@ -14,7 +14,6 @@ def get_all_available_tools() -> list:
         VerificarValidadeDeChavePix,
     ]
 
-
 ## Buscas relacionadas a abrigos
 def BuscarListaDeAbrigosCadastrados(cidade: str = None) -> str:
     """
@@ -24,8 +23,10 @@ def BuscarListaDeAbrigosCadastrados(cidade: str = None) -> str:
     dfEntities = pd.read_excel("/alvinbot/data/tables/Mock_Entidades.xlsx", header=1)
 
     df = dfEntities[(dfEntities.CadastradoComoAbrigo == True)]
+
     if cidade:
         df = dfEntities[(dfEntities.Cidade == cidade)]
+
     df = df[
         [
             "Nome",
@@ -38,6 +39,9 @@ def BuscarListaDeAbrigosCadastrados(cidade: str = None) -> str:
             "Estado",
             "Telefone",
             "LotacaoAutorizada",
+            "EndereçoFormatado",
+            "Latitude",
+            "Longitude"
         ]
     ]
 
@@ -109,7 +113,7 @@ def BuscarAbrigosPrecisandoDeDoacoes(cidade: str = None, item: str = None) -> st
         right_on=["IDOcorrencia"],
     )
     df = df.merge(dfEntities, how="inner", left_on=["IDEntidade"], right_on=["ID"])
-    
+
     if cidade:
         df = df[(df["Cidade"] == cidade)]
 
