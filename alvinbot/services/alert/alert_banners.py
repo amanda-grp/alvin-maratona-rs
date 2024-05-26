@@ -1,6 +1,7 @@
 import os
 import csv
 import requests
+from typing import List
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 # from apscheduler.schedulers.blocking import BlockingScheduler
@@ -15,7 +16,7 @@ class AlertBannersURLExtractor:
         self.knowled_base_path = os.path.join('data', 'tables', 'Real_ListaDeAlertasEmRS.csv')
         self.validity_extractor = AlertBannerValidityExtractor()
 
-    def get_alert_banners_urls(self):
+    def get_alert_banners_urls(self) -> List[str]:
         """Get the URLs of alert banners.
 
         Returns:
@@ -33,7 +34,7 @@ class AlertBannersURLExtractor:
 
         return alerts_urls
     
-    def extract_alerts_validities(self, write_result=True):
+    def extract_alerts_validities(self, write_result=True) -> List[dict]:
         """Extract the validities of alerts.
 
         Args:
@@ -49,19 +50,19 @@ class AlertBannersURLExtractor:
         for alert in valid_alerts:
             alert_url = list(alert.keys())[0]
             alert_dates = list(alert.items())[0][1]
-            alerts_urls.append({"url": alert_url, "start_date": alert_dates[0], "end_date": alert_dates[1], "is_valid": True})
+            alerts_urls.append({"url": alert_url, "data_inicio": alert_dates[0], "data_fim": alert_dates[1], "esta_expirado": True})
 
         for alert in outdated_alerts:
             alert_url = list(alert.keys())[0]
             alert_dates = list(alert.items())[0][1]
-            alerts_urls.append({"url": alert_url, "start_date": alert_dates[0], "end_date": alert_dates[1], "is_valid": False})
+            alerts_urls.append({"url": alert_url, "data_inicio": alert_dates[0], "data_fim": alert_dates[1], "esta_expirado": False})
     
         if write_result:
             self.write_to_csv(alerts_urls)
 
         return alerts_urls
 
-    def read_from_csv(self):
+    def read_from_csv(self) -> List[dict]:
         """Read data from a CSV file.
 
         Returns:
@@ -77,13 +78,13 @@ class AlertBannersURLExtractor:
             pass  # File doesn't exist yet, will be created by write_to_csv
         return data
 
-    def write_to_csv(self, alerts_urls):
+    def write_to_csv(self, alerts_urls: List[str]) -> None:
         """Write data to a CSV file.
 
         Args:
             alerts_urls (list): A list of dictionaries containing the URL, start date, end date, and validity of each alert.
         """
-        fieldnames = ["url", "start_date", "end_date", "is_valid"]
+        fieldnames = ["url", "data_inicio", "data_fim", "esta_expirado"]
         existing_alerts = self.read_from_csv()
 
         with open(self.knowled_base_path, mode='w+', newline='') as file:
@@ -97,7 +98,7 @@ class AlertBannersURLExtractor:
                 writer.writerow(alert)
         
     @staticmethod
-    def download_image(url, target_dir):
+    def download_image(url: str, target_dir: str) -> None:
         """Download an image.
 
         Args:
@@ -115,7 +116,6 @@ def job():
     """The job that will be run every 15 minutes."""
     alert_extractor = AlertBannersURLExtractor()
     alert_extractor.extract_alerts_validities()
-
 
 # # Schedule the job
 # scheduler = BlockingScheduler()
