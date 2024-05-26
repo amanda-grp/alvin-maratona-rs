@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "alvinbot"
+version = "0.1.0"
+description = "Codebase for the Alvin bot project for Maratona RS Hackathon"
+authors = ["Mateus Picanço <mateus@papodedados.com>, Amanda Goldani <amanda.goldani@hotmail.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.11"
+python-telegram-bot = "^21.2"
+maritalk = "^0.2.5"
+python-dotenv = "^1.0.1"
+langchain = "^0.2.1"
+langchain-core = "^0.2.1"
+langchain-community = "^0.2.1"
+httpx = "^0.27.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
