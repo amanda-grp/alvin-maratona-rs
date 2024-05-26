@@ -2,7 +2,7 @@
 name = "alvinbot"
 version = "0.1.0"
 description = "Codebase for the Alvin bot project for Maratona RS Hackathon"
-authors = ["Mateus Picanço <mateus@papodedados.com>, Amanda Goldani <amanda.goldani@hotmail.com>"]
+authors = ["Mateus Picanço <mateus@papodedados.com>, Amanda Goldani <amanda.goldani@hotmail.com>, Damares Resende <dc.oliveiraresende@gmail.com>"]
 readme = "README.md"
 package-mode = false
 
@@ -15,7 +15,6 @@ langchain = "^0.2.1"
 langchain-core = "^0.2.1"
 langchain-community = "^0.2.1"
 httpx = "^0.27.0"
-
 
 [build-system]
 requires = ["poetry-core"]
