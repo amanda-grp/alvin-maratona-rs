@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 import google.generativeai as genai
 
-from alvinbot.tools import get_all_available_tools
+from alvinbot.services.language.tools import get_all_available_tools
 from alvinbot.config import get_system_instructions
 from common.utils import parse_gemini_response
 
