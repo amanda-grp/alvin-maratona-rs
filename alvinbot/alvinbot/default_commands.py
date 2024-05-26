@@ -1,5 +1,4 @@
 from typing import Final
-from templater import load_commands
 
 # Telegram integration
 from telegram import Update

@@ -24,7 +24,7 @@ from langchain_core.prompts.chat import ChatPromptTemplate
 
 # Command management
 from default_commands import start
-from templater import load_commands
+from templater import load_template_file
 
 load_dotenv("config.env")
 TELEGRAM_BOT_TOKEN: Final = os.environ.get("TELEGRAM_BOT_TOKEN")
@@ -35,42 +35,53 @@ GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY")
 genai.configure(api_key=GOOGLE_API_KEY)
 
 # Loads commands:
-commands = load_commands(
+commands = load_template_file(
     'templates/commands.yaml'
 )
 
+prompts = load_template_file(
+    'templates/prompts.yaml'
+)
+
 # handling responses
-def handle_response(text: str) -> str:
+def handle_response(text: str, prompt_template: dict) -> str:
 
-    processed: str = text.lower()
+    user_message: str = text.lower()
+    output_parser = StrOutputParser()
 
-    # output_parser = StrOutputParser()
+    llm = ChatGoogleGenerativeAI(
+        model = 'gemini-1.5-flash'
+    )
 
-    # chat_prompt = ChatPromptTemplate.from_messages(
-    #     [
-    #         (
-    #             "system",
-    #             system_prompt["system"],
-    #         ),
-    #         ("human", "Eu tenho {item} para doar"),
-    #     ]
-    # )
+    chat_prompt = ChatPromptTemplate.from_messages(
+        [
+            (
+                "system",
+                prompt_template["prompts"]["system"] + prompt_template["prompts"]["context"],
+            ),
+            (
+                "human",    
+                f"{user_message}"
+            ),
+        ]
+    )
 
-    # chain = chat_prompt | llm | output_parser
+    chain = chat_prompt | llm | output_parser
 
-    # response = chain.invoke({"item": processed})
+    response = chain.invoke({"user_message": user_message})
 
-    return 'Estou em desenvolvimento ainda, volte depois!'
+    return response
 
 
-async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE, prompt_template: dict):
     message_type: str = update.message.chat.type
     text: str = update.message.text
 
     print(
-        f'Usuario: {update.message.chat.id} mandou uma mensagem no {message_type}: "{text}"'
+        f'User data from message: {update.message.from_user}\nMessage: {text}'
     )
-    response: str = handle_response(text)
+
+    response: str = handle_response(text, prompt_template)
 
     print("Bot: ", response)
     await update.message.reply_text(response)
@@ -79,6 +90,8 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def error(update: Update, context: ContextTypes.DEFAULT_TYPE):
     print(f"Update {update} caused error {context.error}")
 
+async def location(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    print(update.message.location)
 
 if __name__ == "__main__":
     print("Starting Alvin ...")
@@ -88,7 +101,8 @@ if __name__ == "__main__":
     app.add_handler(CommandHandler("comecar", partial(start, command_strings = commands)))
 
     # handles the messages
-    app.add_handler(MessageHandler(filters.TEXT, handle_message))
+    app.add_handler(MessageHandler(filters.TEXT, partial(handle_message, prompt_template=prompts)))
+    app.add_handler(MessageHandler(filters.LOCATION, location))
 
     # same for errors
     app.add_error_handler(error)
