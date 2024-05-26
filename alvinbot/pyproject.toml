@@ -19,6 +19,7 @@ langchain-google-vertexai = "^1.0.4"
 langchain-google-genai = "^1.0.5"
 google-generativeai = "^0.5.4"
 pyyaml = "^6.0.1"
+googlemaps = "^4.10.0"
 
 [tool.poetry.group.dev.dependencies]
 ipython = "^8.24.0"
