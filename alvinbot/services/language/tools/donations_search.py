@@ -1,51 +1,8 @@
 import pandas as pd
+from langchain.pydantic_v1 import BaseModel, Field
+from langchain.tools import BaseTool, StructuredTool, tool
 
-def get_all_available_tools() -> list:
-    """
-        Returns a list o tools (such as API and database requests, and other functions) available
-        to the LLM model.
-    """
-    return [
-        BuscarListaDeAbrigosCadastrados,
-        BuscarListaDeAbrigosParaMulheresECriancasApenas,
-        BuscarAbrigosPrecisandoDeDoacoes,
-        BuscarChavesPixCadastradas,
-        VerificarValidadeDeChavePix
-    ]
-
-## Buscas relacionadas a abrigos
-def BuscarListaDeAbrigosCadastrados(cidade: str = None) -> str:
-    """
-        Retorna entidades ou organizações cadastradas para servirem de abrigos em caso de algum desastre.
-        Parâmetro cidade é opcional.
-    """
-    dfEntities = pd.read_excel("/alvinbot/data/tables/Mock_Entidades.xlsx", header=1)
-
-    df = dfEntities[(dfEntities.CadastradoComoAbrigo == True)]
-    if cidade:
-        df = dfEntities[(dfEntities.Cidade == cidade)]
-    df = df[["Nome", "EndereçoLogradouro", "EndereçoNúmero", "EndereçoComplemento", "CEP", "Bairro", "Cidade", "Estado", "Telefone", "LotacaoAutorizada"]]
-
-    return df.to_json()
-
-def BuscarListaDeAbrigosParaMulheresECriancasApenas(cidade: str = None) -> str:
-    """
-        Retorna abrigos que acolhem apenas mulheres e crianças.
-        Parâmetro cidade é opcional.
-    """
-    dfOccurences = pd.read_excel("/alvinbot/data/tables/Mock_Ocorrencias.xlsx", header=1)
-    dfEntities = pd.read_excel("/alvinbot/data/tables/Mock_Entidades.xlsx", header=1)
-    dfShelters = pd.read_excel("/alvinbot/data/tables/Mock_Abrigos.xlsx", header=1)
-
-    df = dfOccurences[dfOccurences["DataFim"].isna()]
-    df = df.merge(dfShelters[(dfShelters["GruposRestritos"] == "Apenas Mulheres e Crianças") & (dfShelters["DataTermino"].isna())], how='inner', left_on=['ID'],right_on=['IDOcorrencia'])
-    df = df.merge(dfEntities, how='inner', left_on=['IDEntidade'],right_on=['ID'])
-
-    df = df[["Nome_y", "EndereçoLogradouro", "EndereçoNúmero", "EndereçoComplemento", "CEP", "Bairro", "Cidade", "Estado", "Telefone", "LotacaoAutorizada", "GruposRestritos"]]
-
-    return df.to_json()
-
-## Buscas relacionadas a doações e voluntariado
+@tool
 def BuscarAbrigosPrecisandoDeDoacoes(cidade: str = None, item: str = None) -> str:
     """
         Retorna entidades ou organizações precisando de doações, quais items, urgência e quantidade.
@@ -70,7 +27,7 @@ def BuscarAbrigosPrecisandoDeDoacoes(cidade: str = None, item: str = None) -> st
 
     return df2.to_json()
 
-## Buscas relacionadas a chaves PIX cadastradas pelas entidades
+@tool
 def BuscarChavesPixCadastradas(cidade: str = None) -> str:
     """
         Retorna chaves pix válidas de entidades ou organizações cadastradas para receberem doações em dinheiro.
@@ -93,6 +50,7 @@ def BuscarChavesPixCadastradas(cidade: str = None) -> str:
 
     return df.to_json()
 
+@tool
 def VerificarValidadeDeChavePix(chavePix: str) -> str:
   """
     Verifica se a chave pix informada pelo usuário existe e qual a entidade que a cadastrou.

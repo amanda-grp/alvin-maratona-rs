@@ -2,12 +2,21 @@ import os
 from dotenv import load_dotenv
 import google.generativeai as genai
 
-from alvinbot.services.language.tools import get_all_available_tools
-from alvinbot.config import get_system_instructions
-from common.utils import parse_gemini_response
+from alvinbot.services.language.tools.tools import get_all_available_tools
+from alvinbot.services.common.templater import load_template_file
 
 load_dotenv("config.env")
 genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
+
+def get_system_instructions() -> str:
+    """
+        Returns the system instructions that define how Alvin behaves when interacting with the user.
+    """
+    prompts = load_template_file(
+        'alvinbot/templates/prompts.yaml'
+    )
+
+    return prompts["prompts"]["system"] + prompts["prompts"]["context"],
 
 def start_model(enable_tools:bool = True) -> genai.GenerativeModel:
     """
@@ -32,8 +41,17 @@ def get_response_to_user_message(user_message: str, chat_session: genai.ChatSess
         Returns response to user messsage
     """
     response = chat_session.send_message(user_message, stream=False)
-    return parse_gemini_response(response)
+    return parse_response(response)
 
+def parse_response(response: list) -> str:
+  """
+    Parses the model response and return the full string message.
+  """
+  full_response = ""
+  for chunk in response:
+    full_response += chunk.text
+
+  return full_response
 
 if __name__ == "__main__":
     model = start_model()
