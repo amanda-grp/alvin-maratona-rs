@@ -1,6 +1,5 @@
 import pandas as pd
-from langchain.pydantic_v1 import BaseModel, Field
-from langchain.tools import BaseTool, StructuredTool, tool
+from langchain.tools import tool
 
 @tool
 def BuscarListaDeAbrigosCadastrados(cidade: str = None) -> str:
