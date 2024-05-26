@@ -2,7 +2,6 @@ import os
 import re
 import getpass
 from datetime import datetime
-from dotenv import load_dotenv
 from typing import List, Tuple, Optional
 
 from langchain_core.messages import HumanMessage
@@ -20,8 +19,6 @@ class AlertBannerValidityExtractor:
 
         :param current_date: The current date. If not provided, the current system date is used.
         """
-        load_dotenv("config.env")
-
         if "GOOGLE_API_KEY" not in os.environ:
             os.environ["GOOGLE_API_KEY"] = getpass.getpass("Provide your Google API Key: ")
 
