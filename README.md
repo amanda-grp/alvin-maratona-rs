@@ -30,3 +30,71 @@ O Alvin Bot pode ser utilizado por dois tipos de usuários diferentes e pode rea
     - Alvin pode buscar abrigos próximos
     - Alvin pode buscar centros de distribuição de doações próximos e cadastrados
     - Alvin pode pesquisar alertas correntes para o estado do Rio Grande do Sul
+
+### Estrutura
+
+```
+📦alvinbot
+ ┣ 📂data
+ ┃ ┗ 📂tables
+ ┃ ┃ ┣ 📜entidades.json
+ ┃ ┃ ┣ 📜Mock_Abrigos.xlsx
+ ┃ ┃ ┣ 📜Mock_CentroDeDoacoes.xlsx
+ ┃ ┃ ┣ 📜Mock_Entidades.xlsx
+ ┃ ┃ ┣ 📜Mock_LotacaoDosAbrigos.xlsx
+ ┃ ┃ ┣ 📜Mock_Ocorrencias.xlsx
+ ┃ ┃ ┣ 📜Mock_RequisicaoDeDoacoes.xlsx
+ ┃ ┃ ┣ 📜Mock_RequisicaoVoluntarios.xlsx
+ ┃ ┃ ┗ 📜Real_ListaDeAlertasEmRS.csv
+ ┣ 📂services
+ ┃ ┣ 📂alert
+ ┃ ┃ ┣ 📂tests
+ ┃ ┃ ┃ ┗ 📜__init__.py
+ ┃ ┃ ┣ 📜alert_banners.py
+ ┃ ┃ ┗ 📜__init__.py
+ ┃ ┣ 📂bot
+ ┃ ┃ ┣ 📂tests
+ ┃ ┃ ┣ 📜commands.py
+ ┃ ┃ ┗ 📜__init__.py
+ ┃ ┣ 📂common
+ ┃ ┃ ┣ 📂utils
+ ┃ ┃ ┃ ┗ 📜templater.py
+ ┃ ┃ ┗ 📜__init__.py
+ ┃ ┣ 📂donation
+ ┃ ┃ ┣ 📂tests
+ ┃ ┃ ┃ ┗ 📜__init__.py
+ ┃ ┃ ┗ 📜__init__.py
+ ┃ ┣ 📂gemini_llm
+ ┃ ┃ ┗ 📂tests
+ ┃ ┣ 📂help
+ ┃ ┃ ┣ 📂tests
+ ┃ ┃ ┃ ┗ 📜__init__.py
+ ┃ ┃ ┗ 📜__init__.py
+ ┃ ┣ 📂language
+ ┃ ┃ ┣ 📂tests
+ ┃ ┃ ┃ ┗ 📜__init__.py
+ ┃ ┃ ┣ 📂tools
+ ┃ ┃ ┃ ┣ 📜alerts_search.py
+ ┃ ┃ ┃ ┣ 📜donations_search.py
+ ┃ ┃ ┃ ┣ 📜shelthers_search.py
+ ┃ ┃ ┃ ┗ 📜tools.py
+ ┃ ┃ ┣ 📜llm.py
+ ┃ ┃ ┗ 📜__init__.py
+ ┃ ┣ 📂location
+ ┃ ┃ ┣ 📜location.py
+ ┃ ┃ ┗ 📜__init__.py
+ ┃ ┣ 📂vision
+ ┃ ┃ ┣ 📂tests
+ ┃ ┃ ┃ ┣ 📜test_gemini_vision.py
+ ┃ ┃ ┃ ┗ 📜__init__.py
+ ┃ ┃ ┣ 📜gemini_vision.py
+ ┃ ┃ ┗ 📜__init__.py
+ ┃ ┗ 📜__init__.py
+ ┣ 📂templates
+ ┃ ┣ 📜commands.yaml
+ ┃ ┗ 📜prompts.yaml
+ ┣ 📜app.py
+ ┣ 📜poetry.lock
+ ┣ 📜pyproject.toml
+ ┗ 📜__init__.py
+```
