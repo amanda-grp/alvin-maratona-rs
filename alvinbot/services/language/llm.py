@@ -2,8 +2,8 @@ import os
 from dotenv import load_dotenv
 import google.generativeai as genai
 
-from alvinbot.services.language.tools.tools import get_all_available_tools
-from alvinbot.services.common.templater import load_template_file
+from services.language.tools.tools import get_all_available_tools
+from services.common.templater import load_template_file
 
 load_dotenv("config.env")
 genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
@@ -13,7 +13,7 @@ def get_system_instructions() -> str:
         Returns the system instructions that define how Alvin behaves when interacting with the user.
     """
     prompts = load_template_file(
-        'alvinbot/templates/prompts.yaml'
+        'templates/prompts.yaml'
     )
 
     return prompts["prompts"]["system"] + prompts["prompts"]["context"],
