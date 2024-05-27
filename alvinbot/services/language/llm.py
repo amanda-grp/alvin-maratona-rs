@@ -3,7 +3,7 @@ import json
 from typing import Final
 from dotenv import load_dotenv
 
-from services.language.tools.tools import get_all_available_tools
+from services.language.tools.tools import get_all_available_tools, get_tool_map
 from services.common.templater import load_template_file
 
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -20,30 +20,27 @@ def get_system_instructions() -> str:
     """
         Returns the system instructions that define how Alvin behaves when interacting with the user.
     """
-    prompts = load_template_file(
-        'templates/prompts.yaml'
-    )
-
+    prompts = load_template_file('templates/prompts.yaml')
     return prompts["prompts"]["system"] + prompts["prompts"]["context"]
 
 def get_standard_hello_message() -> str:
-    commands = load_template_file(
-        'templates/prompts.yaml'
-    )
+    commands = load_template_file('templates/commands.yaml')
 
     return f"Se apresente apenas uma vez e com base na mensagem: \"{commands["commands"]["start"]}\". Seja breve, claro e não se esqueça de falar sobre a funcionalidade do SOS"
 
 
-def get_system_prompt_template() -> ChatPromptTemplate:
-    return ChatPromptTemplate.from_messages(
-        [
-            ("system", get_system_instructions()),
-            ("human", "{hello_message}")
-        ]
-    )
+def get_system_prompt_template(with_hello_message: bool = False) -> ChatPromptTemplate:
+    if with_hello_message:
+        return ChatPromptTemplate.from_messages(
+            [
+                ("system", get_system_instructions()),
+                ("human", "{hello_message}")
+            ]
+        )
+    return ChatPromptTemplate.from_messages([("system", get_system_instructions()), ("human", "")])
 
 def say_hello(chat_session: ChatGoogleGenerativeAI) -> str:
-    prompt = get_system_prompt_template()
+    prompt = get_system_prompt_template(with_hello_message=True)
     chain = prompt | chat_session | parse_raw_output
     output = chain.invoke({"hello_message": get_standard_hello_message()})
 
@@ -56,7 +53,7 @@ def start_chat_session(model: str, enable_tools: bool = True) -> ChatGoogleGener
     """
     llm = ChatGoogleGenerativeAI(model=model, google_api_key=GOOGLE_API_KEY)
     if enable_tools:
-        llm = llm.bind_tools(get_all_available_tools)
+        llm = llm.bind_tools(get_all_available_tools())
 
     return llm
 
@@ -64,6 +61,8 @@ def get_response_to_user_message(user_message: str, chat_session: ChatGoogleGene
     """
         Returns response to user messsage
     """
+    #prompt = get_system_prompt_template()
+    #chain = prompt | chat_session | parse_raw_output
     chain = chat_session | parse_raw_output
     output = chain.invoke(user_message)
 
@@ -76,7 +75,6 @@ def parse_raw_output(response: AIMessage) -> Runnable:
     tool_calls = response.tool_calls.copy()
     for tool_call in tool_calls:
         tool_call["output"] = get_tool_map()[tool_call["name"]].invoke(tool_call["args"])
-    
     return response
 
 def parse_content_response(response: AIMessage) -> str:

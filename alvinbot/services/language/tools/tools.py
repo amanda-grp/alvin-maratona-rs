@@ -12,7 +12,9 @@ def get_all_available_tools() -> list:
         BuscarListaDeAbrigosParaMulheresECriancasApenas,
         BuscarAbrigosPrecisandoDeDoacoes,
         BuscarChavesPixCadastradas,
-        VerificarValidadeDeChavePix
+        VerificarValidadeDeChavePix,
+        BuscarAlertasDePerigoParaAPopulacaoAtuais,
+        BuscarAlertasDePerigoParaAPopulacaoExpirados
     ]
 
 def get_tool_map() -> dict:
