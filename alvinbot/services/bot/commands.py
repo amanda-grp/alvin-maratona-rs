@@ -21,8 +21,14 @@ async def start(
     """
     start_response = command_strings["commands"]["start"]
 
-    await update.message.reply_text(start_response)
+    if 'last_command' not in context.user_data:
+        await update.message.reply_text(start_response)
+    
+    else:
+        await update.message.reply_text('Algo em que possa ajudar?')
 
+    context.user_data["last_command"] = update.message.text
+    context.user_data['bot_already_started'] = True
 
 async def location_input(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Recebe uma mensagem contendo localização do usuário e retorna respostas relacionadas a essa localização"""
