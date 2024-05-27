@@ -4,7 +4,7 @@ from typing import Final
 from dotenv import load_dotenv
 
 from services.language.tools.tools import get_all_available_tools, get_tool_map
-from services.common.templater import load_template_file
+from services.common.utils.templater import load_template_file
 
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import AIMessage
@@ -61,8 +61,8 @@ def get_response_to_user_message(user_message: str, chat_session: ChatGoogleGene
     """
         Returns response to user messsage
     """
-    #prompt = get_system_prompt_template()
-    #chain = prompt | chat_session | parse_raw_output
+    prompt = get_system_prompt_template()
+    chain = prompt | chat_session | parse_raw_output
     chain = chat_session | parse_raw_output
     output = chain.invoke(user_message)
 
