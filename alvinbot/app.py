@@ -43,7 +43,7 @@ def handle_free_text_response(text: str, chat_session: AgentExecutor) -> str:
 async def handle_free_text_message(
     update: Update, context: ContextTypes.DEFAULT_TYPE, conversation: AgentExecutor
 ):
-    if extract_latest_response_from_memory(conversation.memory) is None:
+    if (extract_latest_response_from_memory(conversation.memory) is None) and (context.user_data['bot_already_started'] == False):
         agent_response = say_hello(conversation)
         print("Bot: ", agent_response)
 
