@@ -8,7 +8,7 @@ def BuscarAlertasDePerigoParaAPopulacaoAtuais() -> str:
         Retorna as URLs com os alertas publicados no site da Defesa Civil para a população do Rio Grande do Sul (RS).
         Essa função considera apenas os alertas ainda válidos
     """
-    dfAlerts = pd.read_csv("alvinbot/data/tables/Real_ListaDeAlertasEmRS.csv".replace('/', os.sep), header=1)
+    dfAlerts = pd.read_csv("alvinbot/data/tables/Real_ListaDeAlertasEmRS.csv".replace('/', os.sep), header=0)
 
     dfAlerts_filtered = dfAlerts.loc[dfAlerts['esta_expirado'] == False]
 
@@ -20,7 +20,7 @@ def BuscarAlertasDePerigoParaAPopulacaoExpirados() -> str:
         Retorna as URLs com os alertas publicados no site da Defesa Civil para a população do Rio Grande do Sul (RS).
         Essa função considera apenas os alertas já expirados.
     """
-    dfAlerts = pd.read_csv("alvinbot/data/tables/Real_ListaDeAlertasEmRS.csv".replace('/', os.sep), header=1)
+    dfAlerts = pd.read_csv("alvinbot/data/tables/Real_ListaDeAlertasEmRS.csv".replace('/', os.sep), header=0)
 
     dfAlerts_filtered = dfAlerts.loc[dfAlerts['esta_expirado'] == True]
 

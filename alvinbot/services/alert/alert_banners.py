@@ -50,12 +50,12 @@ class AlertBannersURLExtractor:
         for alert in valid_alerts:
             alert_url = list(alert.keys())[0]
             alert_dates = list(alert.items())[0][1]
-            alerts_urls.append({"url": alert_url, "data_inicio": alert_dates[0], "data_fim": alert_dates[1], "esta_expirado": True})
+            alerts_urls.append({"url": alert_url, "data_inicio": alert_dates[0], "data_fim": alert_dates[1], "esta_expirado": False})
 
         for alert in outdated_alerts:
             alert_url = list(alert.keys())[0]
             alert_dates = list(alert.items())[0][1]
-            alerts_urls.append({"url": alert_url, "data_inicio": alert_dates[0], "data_fim": alert_dates[1], "esta_expirado": False})
+            alerts_urls.append({"url": alert_url, "data_inicio": alert_dates[0], "data_fim": alert_dates[1], "esta_expirado": True})
     
         if write_result:
             self.write_to_csv(alerts_urls)
