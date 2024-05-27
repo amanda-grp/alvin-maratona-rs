@@ -1,7 +1,7 @@
 import pandas as pd
 from langchain.tools import tool
 
-@tool
+# @tool
 def BuscarListaDeAbrigosCadastrados(cidade: str = None) -> str:
     """
         Retorna entidades ou organizações cadastradas para servirem de abrigos em caso de algum desastre.
@@ -16,7 +16,7 @@ def BuscarListaDeAbrigosCadastrados(cidade: str = None) -> str:
 
     return df.to_json()
 
-@tool
+# @tool
 def BuscarListaDeAbrigosParaMulheresECriancasApenas(cidade: str = None) -> str:
     """
         Retorna abrigos que acolhem apenas mulheres e crianças.

@@ -1,7 +1,7 @@
 import pandas as pd
 from langchain.tools import tool
 
-@tool
+# @tool
 def BuscarAlertasDePerigoParaAPopulacaoAtuais() -> str:
     """
         Retorna as URLs com os alertas publicados no site da Defesa Civil para a população do Rio Grande do Sul (RS).
@@ -13,6 +13,7 @@ def BuscarAlertasDePerigoParaAPopulacaoAtuais() -> str:
 
     return dfAlerts_filtered.to_json()
 
+# @tool
 def BuscarAlertasDePerigoParaAPopulacaoExpirados() -> str:
     """
         Retorna as URLs com os alertas publicados no site da Defesa Civil para a população do Rio Grande do Sul (RS).

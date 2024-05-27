@@ -1,7 +1,7 @@
 import pandas as pd
 from langchain.tools import tool
 
-@tool
+# @tool
 def BuscarAbrigosPrecisandoDeDoacoes(cidade: str = None, item: str = None) -> str:
     """
         Retorna entidades ou organizações precisando de doações, quais items, urgência e quantidade.
@@ -26,7 +26,7 @@ def BuscarAbrigosPrecisandoDeDoacoes(cidade: str = None, item: str = None) -> st
 
     return df2.to_json()
 
-@tool
+# @tool
 def BuscarChavesPixCadastradas(cidade: str = None) -> str:
     """
         Retorna chaves pix válidas de entidades ou organizações cadastradas para receberem doações em dinheiro.
@@ -49,7 +49,7 @@ def BuscarChavesPixCadastradas(cidade: str = None) -> str:
 
     return df.to_json()
 
-@tool
+# @tool
 def VerificarValidadeDeChavePix(chavePix: str) -> str:
   """
     Verifica se a chave pix informada pelo usuário existe e qual a entidade que a cadastrou.

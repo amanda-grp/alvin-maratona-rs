@@ -61,5 +61,5 @@ if __name__ == "__main__":
         prompt = input("Pergunte alguma coisa: ")
         if (prompt == "exit"):
             break
-        response = get_response_to_user_message(prompt)
+        response = get_response_to_user_message(prompt, chat)
         print(response)

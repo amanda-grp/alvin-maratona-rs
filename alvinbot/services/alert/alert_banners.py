@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 from urllib.request import urlopen
 # from apscheduler.schedulers.blocking import BlockingScheduler
 
-from ..vision.gemini_vision import AlertBannerValidityExtractor
+from alvinbot.services.vision.gemini_vision import AlertBannerValidityExtractor
 
 
 class AlertBannersURLExtractor:
