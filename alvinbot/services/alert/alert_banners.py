@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 from urllib.request import urlopen
 # from apscheduler.schedulers.blocking import BlockingScheduler
 
-from alvinbot.services.vision.gemini_vision import AlertBannerValidityExtractor
+from services.vision.gemini_vision import AlertBannerValidityExtractor
 
 
 class AlertBannersURLExtractor:
@@ -117,7 +117,9 @@ def job():
     alert_extractor = AlertBannersURLExtractor()
     alert_extractor.extract_alerts_validities()
 
-# # Schedule the job
-# scheduler = BlockingScheduler()
-# scheduler.add_job(job, 'interval', minutes=15)
-# scheduler.start()
+if __name__ == "__main__":
+    job()
+    # Schedule the job
+    # scheduler = BlockingScheduler()
+    # scheduler.add_job(job, 'interval', minutes=15)
+    # scheduler.start()
