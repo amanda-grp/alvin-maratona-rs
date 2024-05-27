@@ -7,11 +7,11 @@ O Alvin é equipado com conversação baseada em Large Language Models e é capa
 ## Motivação
 Esse projeto foi durante o hackathon [Maratona Pelo RS](https://github.com/TechPeloRS/maratona-pelo-rs), como parte do desafio de Assistência Humanitária.
 
-O Telegram (assim como o WhatsApp) são aplicações largamente utilizadas e que muitos usuários já têm instalado em seus dispositivos móveis. Assim, a criação de um chatbot foi escolhida a fim de facilitar o acesso a informações verídicas pela população, através de um formato familia e amplamente conhecido. De modo que se possa rapidamente obter direcionamentos sobre abrigos, doações e alertas em tempo real, a medida em que os dados ficam disponíveis.
+O Telegram (assim como o WhatsApp) são aplicações largamente utilizadas e que muitos usuários já têm instalado em seus dispositivos móveis. Assim, a criação de um chatbot foi escolhida a fim de facilitar o acesso a informações verídicas pela população, através de um formato familiar e amplamente conhecido. De modo que se possa rapidamente obter direcionamentos sobre abrigos, doações e alertas em tempo real, à medida em que os dados ficam disponíveis.
 
 A possibilidade de conversar com um assistente virtual torna a iteração mais simples, acessível e pessoal, o que é fundamental em momentos tão difíceis como o de uma emergência climática.
 
-Além disso, aplicativos de mensagens são normalmente liberados gratuitamente pelas companhias telefônicas, o que também os tornam uma escolha lógica pela sua acessibilidade e disponibilidade mesmo em situações extremas em que a pessoa pode estar precisando de ajuda e resgate imediatos, mas os telefones oficiais não estão acessíveis. A possibilidade de integrar o chatbot precis para acionar automaticamente os órgãoes oficiais de resgate - i. e. sem que a pessoa em situação de risco precise de uma segunda interação por meio de chamada - é de bastante relevância ao acelerar a identificação da ocorrência e poder fornecer a localização em tempo real.
+Além disso, aplicativos de mensagens são normalmente liberados gratuitamente pelas companhias telefônicas, o que também os tornam uma escolha lógica pela sua acessibilidade e disponibilidade mesmo em situações extremas em que a pessoa pode estar precisando de ajuda e resgate imediatos, mas os telefones oficiais não estão acessíveis. A possibilidade de integrar o chatbot para acionar automaticamente os órgãoes oficiais de resgate - i. e. sem que a pessoa em situação de risco precise de uma segunda interação por meio de chamada telefônica - é de bastante relevância ao acelerar a identificação da ocorrência e poder fornecer sua localização em tempo real.
 
 ## Arquitetura
 O projeto foi desenvolvido em Python usando a arquitetura de micro-serviços visando modularizar as funcionalidades da aplicação para facilitar a manutenção do código.
@@ -25,7 +25,7 @@ Estas ferramentas podem ser substituídas por outras similares, como os modelos 
 ### Tool calling com LangChain (i. e. acesso a APIs e bancos de dados)
 Utilizando a funcionalidade de tool/function calling do Gemini disponível através do LongChain, é possível fornecer ferramentas para que o modelo possa acessar informações em tempo real e realizar outras ações, não limitadas à sua base de conhecimento vinculada. Isso pode ser feito através de APIs ou requests para banco de dados, sendo fornecidas queries pré-definidas no desenvolvimento (i. e. o modelo não controla a configuração dos requests em si, apenas tem conhecimento da ferramenta e seu contexto de aplicação, e apenas recebe seu resultado caso decida por utilizá-la).
 
-Nessa versão, todas ferramentas fornecidas para o modelo não acessam APIs/databases reais, apenas consomem dados amostrais disponibilizadas em arquivos. Isso não afeta o comportamento do modelo, o qual reage aos resultados retornados pelas ferramentas como o faria com dados reais.
+Nessa versão, todas as ferramentas fornecidas para o modelo não acessam APIs/databases reais, apenas consomem dados amostrais disponibilizadas em arquivos. Isso não afeta o comportamento do modelo, o qual reage aos resultados retornados pelas ferramentas como o faria com dados reais.
 
 ### Considerações
 
