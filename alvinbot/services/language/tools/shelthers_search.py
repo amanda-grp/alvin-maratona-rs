@@ -1,5 +1,5 @@
 import pandas as pd
-from langchain.tools import tool
+from langchain_core.tools import tool
 
 @tool
 def BuscarListaDeAbrigosCadastrados(cidade: str = None) -> str:

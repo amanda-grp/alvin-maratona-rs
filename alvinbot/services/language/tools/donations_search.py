@@ -1,5 +1,5 @@
 import pandas as pd
-from langchain.tools import tool
+from langchain_core.tools import tool
 
 @tool
 def BuscarAbrigosPrecisandoDeDoacoes(cidade: str = None, item: str = None) -> str:
@@ -50,7 +50,7 @@ def BuscarChavesPixCadastradas(cidade: str = None) -> str:
     return df.to_json()
 
 @tool
-def VerificarValidadeDeChavePix(chavePix: str) -> str:
+def VerificarValidadeDeChavePix(chave_pix: str) -> str:
   """
     Verifica se a chave pix informada pelo usuário existe e qual a entidade que a cadastrou.
   """
@@ -64,7 +64,7 @@ def VerificarValidadeDeChavePix(chavePix: str) -> str:
   dfDonationCenters = df.merge(dfDonationCenters[(dfDonationCenters["DataTermino"].isna())], how='inner', left_on=['ID'],right_on=['IDOcorrencia'])[["IDEntidade", "ChavePix"]]
 
   df = pd.concat([dfShelters, dfDonationCenters])
-  df = df[(df["ChavePix"] == chavePix)]
+  df = df[(df["ChavePix"] == chave_pix)]
 
   return df.to_json() or "Chave pix não encontrada no banco de dados oficial"
 

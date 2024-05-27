@@ -1,6 +1,6 @@
 ---
 commands:
   start: | 
-    Olá, eu sou o Alvin, sou um Assistente de Localização e Vigilância sobre Incidentes Naturais!
-    O Brasil todo está se esforçando para ajudar nossos companheiros do Rio Grande do Sul.
+    Olá! Eu sou Alvin - o seu _au_ssistente virtual sobre incidentes naturais, se você precisar de ajuda urgente, é só mandar um SOS.
     Eu posso te auxiliar a encontrar informações e ajuda quanto a desastres climáticos e ajuda humanitária.
+    Como posso te ajudar?

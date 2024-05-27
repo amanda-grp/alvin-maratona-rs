@@ -13,3 +13,6 @@ def get_all_available_tools() -> list:
         BuscarChavesPixCadastradas,
         VerificarValidadeDeChavePix
     ]
+
+def get_tool_map() -> dict:
+    return {tool.name: tool for tool in get_all_available_tools()}
