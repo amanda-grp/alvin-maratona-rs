@@ -21,8 +21,13 @@ async def start(
     """
     start_response = command_strings["commands"]["start"]
 
-    await update.message.reply_text(start_response)
+    if 'last_command' in context.user_data:
+        if context.user_data['last_command'] == "/start":
+            await update.message.reply_text('Algo em que possa ajudar?')
 
+    context.user_data["last_command"] = update.message.text
+
+    await update.message.reply_text(start_response)
 
 async def location_input(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Recebe uma mensagem contendo localização do usuário e retorna respostas relacionadas a essa localização"""
