@@ -29,6 +29,9 @@ def BuscarListaDeAbrigosParaMulheresECriancasApenas(cidade: str = None) -> str:
 
     df = dfOccurences[dfOccurences["DataFim"].isna()]
     df = df.merge(dfShelters[(dfShelters["GruposRestritos"] == "Apenas Mulheres e Crianças") & (dfShelters["DataTermino"].isna())], how='inner', left_on=['ID'],right_on=['IDOcorrencia'])
+
+    if cidade:
+        df = dfEntities[(dfEntities.Cidade == cidade)]
     df = df.merge(dfEntities, how='inner', left_on=['IDEntidade'],right_on=['ID'])
 
     df = df[["Nome_y", "EndereçoLogradouro", "EndereçoNúmero", "EndereçoComplemento", "CEP", "Bairro", "Cidade", "Estado", "Telefone", "LotacaoAutorizada", "GruposRestritos"]]
