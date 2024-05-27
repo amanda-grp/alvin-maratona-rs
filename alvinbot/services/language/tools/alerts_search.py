@@ -2,25 +2,25 @@ import os
 import pandas as pd
 from langchain.tools import tool
 
-# @tool
+@tool
 def BuscarAlertasDePerigoParaAPopulacaoAtuais() -> str:
     """
         Retorna as URLs com os alertas publicados no site da Defesa Civil para a população do Rio Grande do Sul (RS).
         Essa função considera apenas os alertas ainda válidos
     """
-    dfAlerts = pd.read_csv("alvinbot/data/tables/Real_ListaDeAlertasEmRS.csv".replace('/', os.sep), header=0)
+    dfAlerts = pd.read_csv("data/tables/Real_ListaDeAlertasEmRS.csv".replace('/', os.sep), header=0)
 
     dfAlerts_filtered = dfAlerts.loc[dfAlerts['esta_expirado'] == False]
 
     return dfAlerts_filtered.to_json()
 
-# @tool
+@tool
 def BuscarAlertasDePerigoParaAPopulacaoExpirados() -> str:
     """
         Retorna as URLs com os alertas publicados no site da Defesa Civil para a população do Rio Grande do Sul (RS).
         Essa função considera apenas os alertas já expirados.
     """
-    dfAlerts = pd.read_csv("alvinbot/data/tables/Real_ListaDeAlertasEmRS.csv".replace('/', os.sep), header=0)
+    dfAlerts = pd.read_csv("data/tables/Real_ListaDeAlertasEmRS.csv".replace('/', os.sep), header=0)
 
     dfAlerts_filtered = dfAlerts.loc[dfAlerts['esta_expirado'] == True]
 
