@@ -6,7 +6,8 @@ from langchain_core.tools import tool
 def BuscarListaDeAbrigosCadastrados(cidade: str = None) -> str:
     """
         Retorna entidades ou organizações cadastradas para servirem de abrigos em caso de algum desastre.
-        Parâmetro cidade é opcional.
+        Parâmetro cidade é opcional. 
+        Não passe nenhum argumento para essa função.
     """
     dfEntities = pd.read_json("data/tables/entidades.json")
     return dfEntities.to_json()

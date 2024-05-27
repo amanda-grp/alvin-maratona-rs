@@ -4,7 +4,7 @@ from services.language.tools.alerts_search import BuscarAlertasDePerigoParaAPopu
 
 def get_all_available_tools() -> list:
     """
-    Retorna uma lista de funcionalidades que o Alvin pode acessar, como consultas em banco de dados, consultas em API, entre disponíveis para o modelo LLM.
+    Retorna uma lista de funcionalidades que o Alvin pode acessar, como consultas em banco de dados, consultas em API, entre disponíveis para o modelo
     """
     return [
         BuscarListaDeAbrigosCadastrados,
