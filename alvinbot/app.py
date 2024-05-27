@@ -96,6 +96,7 @@ if __name__ == "__main__":
             filters.TEXT, partial(handle_free_text_message, prompt_template=prompts, model=llm)
         )
     )
+    
     app.add_handler(MessageHandler(filters.LOCATION, location_input))
 
     # Error handling
