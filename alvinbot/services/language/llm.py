@@ -28,7 +28,7 @@ def get_system_instructions() -> str:
 
 def get_standard_hello_message() -> str:
     commands = load_template_file('templates/commands.yaml')
-    return f"Se apresente apenas uma vez e com base na mensagem: \"{commands["commands"]["start"]}\". Seja breve, claro e não se esqueça de falar sobre a funcionalidade do SOS"
+    return f"Se apresente apenas uma vez e com base na mensagem: {commands['commands']['start']}. Seja breve, claro e não se esqueça de falar sobre a funcionalidade do SOS"
 
 def say_hello(conversation: AgentExecutor) -> str:
     conversation.invoke(f"{get_standard_hello_message()}")
