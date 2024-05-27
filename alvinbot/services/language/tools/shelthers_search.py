@@ -8,14 +8,8 @@ def BuscarListaDeAbrigosCadastrados(cidade: str = None) -> str:
         Retorna entidades ou organizações cadastradas para servirem de abrigos em caso de algum desastre.
         Parâmetro cidade é opcional.
     """
-    dfEntities = pd.read_excel("data/tables/Mock_Entidades.xlsx".replace('/', os.sep), header=1)
-
-    df = dfEntities[(dfEntities.CadastradoComoAbrigo == True)]
-    if cidade:
-        df = dfEntities[(dfEntities.Cidade == cidade)]
-    df = df[["Nome", "EndereçoLogradouro", "EndereçoNúmero", "EndereçoComplemento", "CEP", "Bairro", "Cidade", "Estado", "Telefone", "LotacaoAutorizada"]]
-
-    return df.to_json()
+    dfEntities = pd.read_json("data/tables/entidades.json")
+    return dfEntities.to_json()
 
 @tool
 def BuscarListaDeAbrigosParaMulheresECriancasApenas(cidade: str = None) -> str:

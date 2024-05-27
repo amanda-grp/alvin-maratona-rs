@@ -19,15 +19,12 @@ load_dotenv("config.env")
 GOOGLE_API_KEY: Final = os.environ.get("GOOGLE_API_KEY")
 GOOGLE_PROJECT_ID: Final = os.environ.get("GOOGLE_PROJECT_ID")
 
-def get_system_instructions(bot_already_started: bool = False) -> str:
+def get_system_instructions() -> str:
     """
     Returns the system instructions that define how Alvin behaves when interacting with the user.
     """
     prompts = load_template_file('templates/prompts.yaml')
-    if bot_already_started:
-        system_instruction = prompts['prompts']['system_already_started']
-    else:
-        system_instruction = prompts['prompts']['system_start']
+    system_instruction = prompts['prompts']['system_start']
     return system_instruction
 
 def get_standard_hello_message() -> str:
@@ -91,13 +88,13 @@ def start_chat_session(model: str, enable_tools: bool = True) -> ChatGoogleGener
         llm = llm.bind_tools(get_all_available_tools())
     return llm
 
-def start_conversation(chat_session: ChatGoogleGenerativeAI, enable_tools: bool = True, bot_already_started: bool = False) -> AgentExecutor:
+def start_conversation(chat_session: ChatGoogleGenerativeAI, enable_tools: bool = True) -> AgentExecutor:
     tools = get_all_available_tools() if enable_tools else []
     
     agent = ConversationalChatAgent.from_llm_and_tools(
         llm=chat_session,
         tools=tools,
-        system_message=get_system_instructions(bot_already_started)
+        system_message=get_system_instructions()
     )
 
     executor = AgentExecutor.from_agent_and_tools(
