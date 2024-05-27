@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Codebase for the Alvin bot project for Maratona RS Hackathon"
 authors = ["Mateus Picanço <mateus@papodedados.com>, Amanda Goldani <amanda.goldani@hotmail.com>, Damares Resende <dc.oliveiraresende@gmail.com>"]
 readme = "README.md"
-package-mode = false
+#package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -19,6 +19,7 @@ langchain-google-vertexai = "^1.0.4"
 langchain-google-genai = "^1.0.5"
 google-generativeai = "^0.5.4"
 pyyaml = "^6.0.1"
+googlemaps = "^4.10.0"
 
 [tool.poetry.group.dev.dependencies]
 ipython = "^8.24.0"

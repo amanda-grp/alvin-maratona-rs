@@ -4,3 +4,14 @@ commands:
     Olá, eu sou o Alvin, sou um Assistente de Localização e Vigilância sobre Incidentes Naturais!
     O Brasil todo está se esforçando para ajudar nossos companheiros do Rio Grande do Sul.
     Eu posso te auxiliar a encontrar informações e ajuda quanto a desastres climáticos e ajuda humanitária.
+  nearby_shelters: 
+    error_states: 
+      no_location_shared: | 
+        Para que eu possa ajudar a encontrar abrigos que estão recebendo pessoas, animais ou doações
+        para lidar com o desastre climático no Rio Grande do Sul, preciso que você compartilhe sua localização comigo.
+        Tente enviar sua localização para que eu possa continuar!
+    default_messages:
+      instructions: |
+        Para que eu possa ajudar a encontrar abrigos próximos, por favor enviar sua localização aqui no chat!
+  error: |
+    Desculpe, não entendi muito bem o que falou, poderia tentar novamente?
