@@ -3,8 +3,8 @@ import json
 from typing import Final
 from dotenv import load_dotenv
 
-from alvinbot.services.language.tools.tools import get_all_available_tools, get_tool_map
-from alvinbot.services.common.templater import load_template_file
+from services.language.tools.tools import get_all_available_tools
+from services.common.templater import load_template_file
 
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import AIMessage
@@ -21,14 +21,14 @@ def get_system_instructions() -> str:
         Returns the system instructions that define how Alvin behaves when interacting with the user.
     """
     prompts = load_template_file(
-        'alvinbot/templates/prompts.yaml'
+        'templates/prompts.yaml'
     )
 
     return prompts["prompts"]["system"] + prompts["prompts"]["context"]
 
 def get_standard_hello_message() -> str:
     commands = load_template_file(
-        'alvinbot/templates/prompts.yaml'
+        'templates/prompts.yaml'
     )
 
     return f"Se apresente apenas uma vez e com base na mensagem: \"{commands["commands"]["start"]}\". Seja breve, claro e não se esqueça de falar sobre a funcionalidade do SOS"
