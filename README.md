@@ -44,7 +44,7 @@ O Alvin pode ser utilizado por dois tipos de usuários diferentes e pode realiza
 
 ### Estrutura
 
-Como dito anteriormente, código é estruturado baseado na arquitetura de microserviços. A aplicação principal está em `app.py`. Este script acessa os outros serviços, como o de `bot` que faz a interface com o Telegram, o de `location` que lida com a localização do usuário e busca por abrigos e centros de distribuição próximos, o de `language` que é responsável por interpretar os inputs do usuário e buscar pela informação correspondente (neste contexto cada `tool` realiza uma tarefa específica).
+Como dito anteriormente, o código é estruturado baseado na arquitetura de microserviços. A aplicação principal está em `app.py`. Este script acessa os outros serviços, como o de `bot` que faz a interface com o Telegram, o de `location` que lida com a localização do usuário e busca por abrigos e centros de distribuição próximos, o de `language` que é responsável por interpretar os inputs do usuário e buscar pela informação correspondente (neste contexto cada `tool` realiza uma tarefa específica).
 
 O módulo `alert` é isolado e serve para extrair informações do site da Defesa Civil do Rio Grande do Sul e atualizar os dados em `data/Real_ListaDeAlertasEmRS.csv`. Este módulo é dependente do módulo `vision` que extrái dados dos banners dos alertas.
 
