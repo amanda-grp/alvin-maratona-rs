@@ -99,3 +99,12 @@ O módulo `alert` é isolado e serve para extrair informações do site da Defes
  ┣ 📜poetry.lock
  ┣ 📜pyproject.toml
 ```
+
+### Próximos Passos
+
+O Alvin se encontra ainda em estado de protótipo e especificamente voltado para o cenário que atinge o Rio Grande do Sul, referenciando dados estáticos. 
+Nossos próximos passos no projeto visam construir a orquestração básica do Alvin em nuvem para que o uptime seja mantido independente da nossa própria infraestrutura de teste.
+
+Além disso, procuraremos entidades parceiras, como a [SOS RS](https://sos-rs.com/) e [Tchê Ajuda](https://tcheajuda.com) para agregar as informações coletas para que o Alvin consiga acessá-las de forma programática ou com maior frequência. 
+
+Por fim, também planejamos integrar o Alvin com feeds RSS do INMET (Instituto Nacional de Meteorologia) para publicação de alertas de abrangência nacional para estender suas funcionalidades além do estado do Rio Grande do Sul.
