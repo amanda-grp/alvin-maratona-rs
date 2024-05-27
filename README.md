@@ -5,7 +5,7 @@ Alvin (Assistente de Localização e Vigilância sobre Incidentes Naturais ~óbi
 O Alvin é equipado com conversação baseada em Large Language Models e é capaz de acessar informações como abrigos que estão recebendos doações e/ou pessoas, encontrar pontos de recolhimento de recursos e abrigos próximos ao usuário, alertas da Defesa Civil, entre outros.
 
 ## Motivação
-Esse projeto foi desenvolvido como parte do hackathon [Maratona Pelo RS](https://github.com/TechPeloRS/maratona-pelo-rs), como parte do desafio de Assistência Humanitária.
+Esse projeto foi durante o hackathon [Maratona Pelo RS](https://github.com/TechPeloRS/maratona-pelo-rs), como parte do desafio de Assistência Humanitária.
 
 O Telegram (assim como o WhatsApp) são aplicações largamente utilizadas e que muitos usuários já têm instalado em seus dispositivos móveis. Assim, a criação de um chatbot foi escolhida a fim de facilitar o acesso a informações verídicas pela população, através de um formato familia e amplamente conhecido. De modo que se possa rapidamente obter direcionamentos sobre abrigos, doações e alertas em tempo real, a medida em que os dados ficam disponíveis.
 
