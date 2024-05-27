@@ -9,7 +9,9 @@ O projeto foi desenvolvido em Python usando a arquitetura de micro-serviços vis
 
 Nesta versão, utilizamos o Google Gemini Language para gerenciar as conversas do chat, o Google Gemini Vision para extrair informações de imagens de banners de alerta postados no site da Defesa Civil do Rio Grande do Sul, ambos modelos empacotados pelo LangChain. Por fim, usamos o Telegram BotFather como interface com o usuário final.
 
-Estas ferramentas podem ser substituídas por outras similares, como os modelos generativos da OpenAI, e o WhatsApp.
+Estas ferramentas podem ser substituídas por outras similares, como os modelos generativos da OpenAI, e o WhatsApp. Uma visão abrangente do projeto pode ser encontrada na figura a seguir.
+
+![alt text](alvinbot/data/images/diagrama-uso.png)
 
 ### APIs (i. e. tool calling ) com LangChain
 Utilizando a funcionalidade de tool/function calling do Gemini disponível através do LongChain, é possível fornecer ferramentas para que o modelo possa acessar informações em tempo real e realizar outras ações, não limitadas à sua base de conhecimento vinculada. Isso pode ser feito através de APIs ou requests para banco de dados, sendo fornecidas queries pré-definidas no desenvolvimento (i. e. o modelo não controla a configuração dos requests em si, apenas tem conhecimento da ferramenta e seu contexto de aplicação, e apenas recebe seu resultado caso decida por utilizá-la).
@@ -41,6 +43,10 @@ O Alvin pode ser utilizado por dois tipos de usuários diferentes e pode realiza
     - Alvin pode pesquisar alertas correntes para o estado do Rio Grande do Sul
 
 ### Estrutura
+
+Como dito anteriormente, código é estruturado baseado na arquitetura de microserviços. A aplicação principal está em `app.py`. Este script acessa os outros serviços, como o de `bot` que faz a interface com o Telegram, o de `location` que lida com a localização do usuário e busca por abrigos e centros de distribuição próximos, o de `language` que é responsável por interpretar os inputs do usuário e buscar pela informação correspondente (neste contexto cada `tool` realiza uma tarefa específica).
+
+O módulo `alert` é isolado e serve para extrair informações do site da Defesa Civil do Rio Grande do Sul e atualizar os dados em `data/Real_ListaDeAlertasEmRS.csv`. Este módulo é dependente do módulo `vision` que extrái dados dos banners dos alertas.
 
 ```
 📦alvinbot
